@@ -8,8 +8,8 @@ let questions = [
     topic: "React",
     question: "sos",
     comments: [
-      { index: 0, text: "Uno" },
-      { index: 1, text: "Dos" },
+      { id: 0, text: "Uno" },
+      { id: 1, text: "Dos" },
     ],
   },
   {
@@ -18,8 +18,8 @@ let questions = [
     topic: "Functions",
     question: "why is this not working?",
     comments: [
-      { index: 0, text: "Lorem" },
-      { index: 1, text: "Ipsum" },
+      { id: 0, text: "Lorem" },
+      { id: 1, text: "Ipsum" },
     ],
   },
 ];
@@ -69,19 +69,25 @@ router.get("/:id", function (req, res) {
 });
 
 // ADD COMMENT
-// router.post("/:id")
+router.post("/:id", function (req, res) {
+  const index = req.params.id;
+  const { payload } = req.body;
+  console.log(payload);
+  questions[index].comments = payload;
+  res.json({ message: "Comments updated", payload: questions[index].comments });
+});
 
 // DELETE COMMENT
-router.delete("/:questionId/:id", function (req, res) {
-  const questionIndex = req.params.questionId;
-  const commentIndex = req.params.id;
-  questions[questionIndex].comments = [
-    ...questions[questionIndex].comments.slice(0, commentIndex),
-    ...questions[questionIndex].comments.slice(commentIndex + 1),
+router.delete("/:questionId/:commentId", function (req, res) {
+  const questionId = req.params.questionId;
+  const commentId = req.params.commentId;
+  questions[questionId].comments = [
+    ...questions[questionId].comments.slice(0, commentId),
+    ...questions[questionId].comments.slice(commentId + 1),
   ];
   res.json({
     message: "Comment deleted",
-    payload: questions[questionIndex].comments,
+    payload: questions[questionId].comments, // not totally efficient
   });
 });
 
