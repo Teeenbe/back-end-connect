@@ -5,6 +5,7 @@ const logger = require("morgan");
 
 const indexRouter = require("./routes/index");
 const forumRouter = require("./routes/forum");
+const profilesRouter = require("./routes/profiles");
 
 const app = express();
 
@@ -16,5 +17,6 @@ app.use(cookieParser());
 
 app.use("/", indexRouter);
 app.use("/forum/", forumRouter);
+app.use("/profiles/", profilesRouter);
 
 module.exports = app;
