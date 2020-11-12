@@ -81,6 +81,10 @@ router.post("/:id", function (req, res) {
 router.delete("/:questionId/:commentId", function (req, res) {
   const questionId = req.params.questionId;
   const commentId = req.params.commentId;
+  //   questions[questionId].comments = questions[questionId].comments.filter(
+  //     (c) => c.id !== commentId
+  //   );
+  //   console.log(questions[questionId].comments);
   questions[questionId].comments = [
     ...questions[questionId].comments.slice(0, commentId),
     ...questions[questionId].comments.slice(commentId + 1),
