@@ -37,17 +37,17 @@ const { getProfiles, addProfile } = require("../model/profiles");
 // ];
 
 // GET PROFILES
-router.get("/", function (req, res) {
-  const profiles = getProfiles();
+router.get("/", async function (req, res) {
+  const profiles = await getProfiles();
   res.json({ message: "Data sent", payload: profiles });
 });
 
 // ADD PROFILE
-router.post("/", function (req, res) {
+router.post("/", async function (req, res) {
   const { payload } = req.body;
   // Insert into database
   //   profilesArray.push(payload);
-  addProfile(payload);
+  await addProfile(payload);
   res.json({
     success: true,
   });

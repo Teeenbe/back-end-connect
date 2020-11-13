@@ -4,12 +4,12 @@ const sqlStatement = `
 CREATE TABLE profiles (
     id SERIAL PRIMARY KEY,
     type TEXT,
-    firstname TEXT,
-    lastname TEXT,
-    aboutme TEXT,
+    first_name TEXT,
+    last_name TEXT,
+    about_me TEXT,
     interests TEXT[],
     experience TEXT,
-    emailaddress TEXT
+    email_address TEXT
 );`;
 
 async function createTable() {

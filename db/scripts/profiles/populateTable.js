@@ -32,7 +32,7 @@ const profilesArray = [
 
 const sqlStatement = `
 INSERT INTO profiles
-    (type, firstname, lastname, aboutme, interests, experience, emailaddress)
+    (type, first_name, last_name, about_me, interests, experience, email_address)
 VALUES
     ($1, $2, $3, $4, $5, $6, $7)
 ;`;

@@ -4,7 +4,7 @@ const sqlStatement = `
 CREATE TABLE comments (
     id SERIAL PRIMARY KEY,
     text TEXT,
-    questionid INT,
+    questionId INT,
     CONSTRAINT fk_comments
         FOREIGN KEY (questionid)
             REFERENCES questions(id)
