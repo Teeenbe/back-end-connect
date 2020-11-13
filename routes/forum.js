@@ -1,28 +1,30 @@
 const express = require("express");
 const router = express.Router();
 
-let questions = [
-  {
-    id: 0,
-    name: "Bryan",
-    topic: "React",
-    question: "sos",
-    comments: [
-      { id: 0, text: "Uno" },
-      { id: 1, text: "Dos" },
-    ],
-  },
-  {
-    id: 1,
-    name: "Jess",
-    topic: "Functions",
-    question: "why is this not working?",
-    comments: [
-      { id: 0, text: "Lorem" },
-      { id: 1, text: "Ipsum" },
-    ],
-  },
-];
+const { getQuestions, addQuestion } = require("../model/questions");
+
+// let questions = [
+//   {
+//     id: 0,
+//     name: "Bryan",
+//     topic: "React",
+//     question: "sos",
+//     comments: [
+//       { id: 0, text: "Uno" },
+//       { id: 1, text: "Dos" },
+//     ],
+//   },
+//   {
+//     id: 1,
+//     name: "Jess",
+//     topic: "Functions",
+//     question: "why is this not working?",
+//     comments: [
+//       { id: 0, text: "Lorem" },
+//       { id: 1, text: "Ipsum" },
+//     ],
+//   },
+// ];
 
 /*
 
@@ -31,7 +33,8 @@ QUESTIONS
 */
 
 // GET QUESTIONS
-router.get("/", function (req, res) {
+router.get("/", async function (req, res) {
+  const questions = await getQuestions();
   res.json({
     message: "Success",
     payload: questions,
@@ -39,11 +42,12 @@ router.get("/", function (req, res) {
 });
 
 // ADD QUESTION
-router.post("/", function (req, res) {
+router.post("/", async function (req, res) {
   const { payload } = req.body;
   console.log(payload);
-  questions = payload;
-  res.json({ message: "Questions updated", payload: questions });
+  //   questions = payload;
+  await addQuestion(payload);
+  res.json({ success: true });
 });
 
 // DELETE QUESTION

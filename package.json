@@ -13,6 +13,7 @@
     "drop-questions-table": "node -r dotenv/config db/scripts/questions/dropTable.js",
     "delete-questions-rows": "node -r dotenv/config db/scripts/questions/deleteRows.js",
     "read-questions-table": "node -r dotenv/config db/scripts/questions/readTable.js",
+    "populate-questions-table": "node -r dotenv/config db/scripts/questions/populateTable.js",
     "create-comments-table": "node -r dotenv/config db/scripts/comments/createTable.js",
     "drop-comments-table": "node -r dotenv/config db/scripts/comments/dropTable.js",
     "delete-comments-rows": "node -r dotenv/config db/scripts/comments/deleteRows.js",
