@@ -21,7 +21,16 @@ async function addProfile(data) {
   await query(sqlStatement, profileData);
 }
 
+async function deleteProfile(id) {
+  const sqlStatement = `
+    DELETE FROM profiles
+    WHERE id = $1
+  ;`;
+  await query(sqlStatement, [id]);
+}
+
 module.exports = {
   getProfiles,
   addProfile,
+  deleteProfile,
 };

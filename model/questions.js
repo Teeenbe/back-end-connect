@@ -21,7 +21,21 @@ async function addQuestion(data) {
   await query(sqlStatement, questionData);
 }
 
+async function deleteQuestion(id) {
+  let sqlStatement = `
+    DELETE FROM comments
+    WHERE question_id = $1
+  ;`;
+  await query(sqlStatement, [id]);
+  sqlStatement = `
+    DELETE FROM questions
+    WHERE id = $1
+  ;`;
+  await query(sqlStatement, [id]);
+}
+
 module.exports = {
   getQuestions,
   addQuestion,
+  deleteQuestion,
 };

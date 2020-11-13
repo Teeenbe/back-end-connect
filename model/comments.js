@@ -4,7 +4,7 @@ async function getComments(id) {
   const sqlStatement = `
     SELECT *
     FROM comments
-    WHERE question_id = ($1)
+    WHERE question_id = $1
     ;`;
   const res = await query(sqlStatement, [id]);
   console.log(res.rows);
@@ -19,11 +19,19 @@ async function addComment(data) {
         ($1, $2)
     ;`;
   questionData = Object.values(data);
-  console.log(questionData);
   await query(sqlStatement, questionData);
+}
+
+async function deleteComment(id) {
+  const sqlStatement = `
+    DELETE FROM comments
+    WHERE id = $1
+    ;`;
+  await query(sqlStatement, [id]);
 }
 
 module.exports = {
   getComments,
   addComment,
+  deleteComment,
 };

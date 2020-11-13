@@ -1,7 +1,7 @@
 const express = require("express");
 const router = express.Router();
 
-const { getProfiles, addProfile } = require("../model/profiles");
+const { getProfiles, addProfile, deleteProfile } = require("../model/profiles");
 
 // const profilesArray = [
 //   {
@@ -54,9 +54,10 @@ router.post("/", async function (req, res) {
 });
 
 // DELETE PROFILE
-router.delete("/:id", function (req, res) {
-  const profileId = req.params.id;
-  console.log("Profile to be deleted: " + profileId);
+router.delete("/:id", async function (req, res) {
+  const id = req.params.id;
+  await deleteProfile(id);
+  res.json({ success: true });
 });
 
 module.exports = router;

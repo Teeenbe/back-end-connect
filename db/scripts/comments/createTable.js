@@ -8,7 +8,7 @@ CREATE TABLE comments (
     CONSTRAINT fk_comments
         FOREIGN KEY (question_id)
             REFERENCES questions(id)
-                ON DELETE SET NULL
+              ON DELETE NO ACTION
 );`;
 
 async function createTable() {
