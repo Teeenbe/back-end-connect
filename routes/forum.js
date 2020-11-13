@@ -8,29 +8,6 @@ const {
 } = require("../model/questions");
 const { getComments, addComment, deleteComment } = require("../model/comments");
 
-// let questions = [
-//   {
-//     id: 0,
-//     name: "Bryan",
-//     topic: "React",
-//     question: "sos",
-//     comments: [
-//       { id: 0, text: "Uno" },
-//       { id: 1, text: "Dos" },
-//     ],
-//   },
-//   {
-//     id: 1,
-//     name: "Jess",
-//     topic: "Functions",
-//     question: "why is this not working?",
-//     comments: [
-//       { id: 0, text: "Lorem" },
-//       { id: 1, text: "Ipsum" },
-//     ],
-//   },
-// ];
-
 /*
 
 QUESTIONS
@@ -91,20 +68,12 @@ router.post("/:id", async function (req, res) {
 // DELETE COMMENT
 router.delete("/:id/:commentId", async function (req, res) {
   const commentId = req.params.commentId;
-  //   questions[questionId].comments = questions[questionId].comments.filter(
-  //     (c) => c.id !== commentId
-  //   );
-  //   console.log(questions[questionId].comments);
-  //   questions[questionId].comments = [
-  //     ...questions[questionId].comments.slice(0, commentId),
-  //     ...questions[questionId].comments.slice(commentId + 1),
-  //   ];
   await deleteComment(commentId);
   res.json({ success: true });
 });
 
 // router.put("/:id", function(req, res) {
-//     const index = req.params.id;
+//     const id = req.params.id;
 //     const { name, topic, question } = req.body;
 // });
 
