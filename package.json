@@ -17,7 +17,8 @@
     "create-comments-table": "node -r dotenv/config db/scripts/comments/createTable.js",
     "drop-comments-table": "node -r dotenv/config db/scripts/comments/dropTable.js",
     "delete-comments-rows": "node -r dotenv/config db/scripts/comments/deleteRows.js",
-    "read-comments-table": "node -r dotenv/config db/scripts/comments/readTable.js"
+    "read-comments-table": "node -r dotenv/config db/scripts/comments/readTable.js",
+    "populate-comments-table": "node -r dotenv/config db/scripts/comments/populateTable.js"
   },
   "dependencies": {
     "cookie-parser": "~1.4.4",

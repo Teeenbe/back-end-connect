@@ -2,6 +2,7 @@ const express = require("express");
 const router = express.Router();
 
 const { getQuestions, addQuestion } = require("../model/questions");
+const { getComments, addComment } = require("../model/comments");
 
 // let questions = [
 //   {
@@ -64,21 +65,23 @@ COMMENTS
 */
 
 // GET COMMENTS
-router.get("/:id", function (req, res) {
-  const index = req.params.id;
+router.get("/:id", async function (req, res) {
+  const id = req.params.id;
+  const comments = await getComments(id);
   res.json({
     message: "Comments returned",
-    payload: questions[index].comments,
+    payload: comments,
   });
 });
 
 // ADD COMMENT
-router.post("/:id", function (req, res) {
-  const index = req.params.id;
+router.post("/:id", async function (req, res) {
+  const questionId = req.params.id;
   const { payload } = req.body;
   console.log(payload);
-  questions[index].comments = payload;
-  res.json({ message: "Comments updated", payload: questions[index].comments });
+  //   questions[index].comments = payload;
+  await addComment(payload);
+  res.json({ success: true });
 });
 
 // DELETE COMMENT

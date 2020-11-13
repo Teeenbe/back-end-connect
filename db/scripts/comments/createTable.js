@@ -4,9 +4,9 @@ const sqlStatement = `
 CREATE TABLE comments (
     id SERIAL PRIMARY KEY,
     text TEXT,
-    questionId INT,
+    question_id INT,
     CONSTRAINT fk_comments
-        FOREIGN KEY (questionid)
+        FOREIGN KEY (question_id)
             REFERENCES questions(id)
                 ON DELETE SET NULL
 );`;
