@@ -13,6 +13,7 @@ router.get("/", async function (req, res) {
 router.post("/", async function (req, res) {
   const { payload } = req.body;
   await addProfile(payload);
+
   res.json({
     success: true,
   });
