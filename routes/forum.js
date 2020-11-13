@@ -1,28 +1,12 @@
 const express = require("express");
 const router = express.Router();
 
-let questions = [
-  {
-    id: 0,
-    name: "Bryan",
-    topic: "React",
-    question: "sos",
-    comments: [
-      { id: 0, text: "Uno" },
-      { id: 1, text: "Dos" },
-    ],
-  },
-  {
-    id: 1,
-    name: "Jess",
-    topic: "Functions",
-    question: "why is this not working?",
-    comments: [
-      { id: 0, text: "Lorem" },
-      { id: 1, text: "Ipsum" },
-    ],
-  },
-];
+const {
+  getQuestions,
+  addQuestion,
+  deleteQuestion,
+} = require("../model/questions");
+const { getComments, addComment, deleteComment } = require("../model/comments");
 
 /*
 
@@ -31,26 +15,28 @@ QUESTIONS
 */
 
 // GET QUESTIONS
-router.get("/", function (req, res) {
+router.get("/", async function (req, res) {
+  const questions = await getQuestions();
   res.json({
-    message: "Success",
+    message: "Data sent",
     payload: questions,
   });
 });
 
 // ADD QUESTION
-router.post("/", function (req, res) {
+router.post("/", async function (req, res) {
   const { payload } = req.body;
   console.log(payload);
-  questions = payload;
-  res.json({ message: "Questions updated", payload: questions });
+  //   questions = payload;
+  await addQuestion(payload);
+  res.json({ success: true });
 });
 
 // DELETE QUESTION
-router.delete("/:id", function (req, res) {
-  const index = req.params.id;
-  questions = [...questions.slice(0, index), ...questions.slice(index + 1)];
-  res.json({ message: "Mission success", payload: questions });
+router.delete("/:id", async function (req, res) {
+  const id = req.params.id;
+  await deleteQuestion(id);
+  res.json({ success: true });
 });
 
 /*
@@ -60,43 +46,34 @@ COMMENTS
 */
 
 // GET COMMENTS
-router.get("/:id", function (req, res) {
-  const index = req.params.id;
+router.get("/:id", async function (req, res) {
+  const id = req.params.id;
+  const comments = await getComments(id);
   res.json({
     message: "Comments returned",
-    payload: questions[index].comments,
+    payload: comments,
   });
 });
 
 // ADD COMMENT
-router.post("/:id", function (req, res) {
-  const index = req.params.id;
+router.post("/:id", async function (req, res) {
   const { payload } = req.body;
-  console.log(payload);
-  questions[index].comments = payload;
-  res.json({ message: "Comments updated", payload: questions[index].comments });
+  //   if (payload === undefined) {
+  //     res.json({ success: false });
+  //   }
+  await addComment(payload);
+  res.json({ success: true });
 });
 
 // DELETE COMMENT
-router.delete("/:questionId/:commentId", function (req, res) {
-  const questionId = req.params.questionId;
+router.delete("/:id/:commentId", async function (req, res) {
   const commentId = req.params.commentId;
-  //   questions[questionId].comments = questions[questionId].comments.filter(
-  //     (c) => c.id !== commentId
-  //   );
-  //   console.log(questions[questionId].comments);
-  questions[questionId].comments = [
-    ...questions[questionId].comments.slice(0, commentId),
-    ...questions[questionId].comments.slice(commentId + 1),
-  ];
-  res.json({
-    message: "Comment deleted",
-    payload: questions[questionId].comments, // not totally efficient
-  });
+  await deleteComment(commentId);
+  res.json({ success: true });
 });
 
 // router.put("/:id", function(req, res) {
-//     const index = req.params.id;
+//     const id = req.params.id;
 //     const { name, topic, question } = req.body;
 // });
 
