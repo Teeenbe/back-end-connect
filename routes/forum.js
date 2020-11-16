@@ -15,7 +15,7 @@ QUESTIONS
 */
 
 // GET QUESTIONS
-router.get("/", async function (req, res) {
+router.get("/*", async function (req, res) {
   const questions = await getQuestions();
   res.json({
     message: "Data sent",
