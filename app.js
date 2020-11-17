@@ -15,7 +15,7 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 
-app.use("/*", indexRouter);
+app.use("/", indexRouter);
 app.use("/forum", forumRouter);
 app.use("/profiles", profilesRouter);
 
